@@ -97,4 +97,12 @@ char *Z_Strdup(const char *s, int tag, void **user);
 
 void Z_ZoneHistory(char *);
 
+typedef struct memblock {
+  unsigned id;
+  struct memblock *next,*prev;
+  size_t size;
+  void **user;
+  unsigned char tag;
+} memblock_t;
+
 #endif

@@ -60,27 +60,12 @@
 #include <dpmi.h>
 #endif
 
-// Tunables
-
 // signature for block header
 #define ZONEID  0x931d4a11
 
-// Number of mallocs & frees kept in history buffer (must be a power of 2)
-#define ZONE_HISTORY 4
+#define HEADER_SIZE sizeof(memblock_t)
 
-// End Tunables
-
-typedef struct memblock {
-  unsigned id;
-  struct memblock *next,*prev;
-  size_t size;
-  void **user;
-  unsigned char tag;
-} memblock_t;
-
-static const size_t HEADER_SIZE = sizeof(memblock_t);
-
-static memblock_t *blockbytag[PU_MAX];
+memblock_t *blockbytag[PU_MAX];
 
 /* Z_Malloc
  * You can pass a NULL user if the tag is not PU_CACHE.

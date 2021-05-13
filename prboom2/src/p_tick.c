@@ -40,13 +40,15 @@
 #include "e6y.h"
 #include "s_advsound.h"
 
+#include "dsda/zone_x.h"
+
 int leveltime;
 
 static dboolean newthinkerpresent;
 
 //
 // THINKERS
-// All thinkers should be allocated by Z_Malloc
+// All thinkers should be allocated by dsda_MallocThinker
 // so they can be operated on uniformly.
 // The actual structures will vary in size,
 // but the first element must be thinker_t.
@@ -161,7 +163,7 @@ void P_RemoveThinkerDelayed(thinker_t *thinker)
         thinker_t *th = thinker->cnext;
         (th->cprev = thinker->cprev)->cnext = th;
       }
-      Z_Free(thinker);
+      dsda_FreeThinker(thinker);
     }
 }
 

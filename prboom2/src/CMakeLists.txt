@@ -53,6 +53,8 @@ set(COMMON_SRC
     dsda/tas.h
     dsda/time.c
     dsda/time.h
+    dsda/zone_x.c
+    dsda/zone_x.h
     dstrings.c
     dstrings.h
     d_deh.c

@@ -41,6 +41,8 @@
 #include "lprintf.h"
 #include "e6y.h"//e6y
 
+#include "dsda/zone_x.h"
+
 platlist_t *activeplats;       // killough 2/14/98: made global again
 
 //
@@ -244,7 +246,7 @@ manual_plat://e6y
 
     // Create a thinker
     rtn = 1;
-    plat = Z_Malloc( sizeof(*plat), PU_LEVEL, 0);
+    plat = dsda_MallocThinker(sizeof(*plat));
     memset(plat, 0, sizeof(*plat));
     P_AddThinker(&plat->thinker);
 

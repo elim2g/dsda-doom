@@ -64,6 +64,7 @@
 #include "dsda.h"
 
 #include "dsda/global.h"
+#include "dsda/zone_x.h"
 
 //
 //      source animation definition
@@ -2984,7 +2985,7 @@ void T_Scroll(scroll_t *s)
 static void Add_Scroller(int type, fixed_t dx, fixed_t dy,
                          int control, int affectee, int accel)
 {
-  scroll_t *s = Z_Malloc(sizeof *s, PU_LEVEL, 0);
+  scroll_t *s = dsda_MallocThinker(sizeof *s);
   s->thinker.function = T_Scroll;
   s->type = type;
   s->dx = dx;
@@ -3159,7 +3160,7 @@ static void P_SpawnScrollers(void)
 
 static void Add_Friction(int friction, int movefactor, int affectee)
 {
-    friction_t *f = Z_Malloc(sizeof *f, PU_LEVEL, 0);
+    friction_t *f = dsda_MallocThinker(sizeof *f);
 
     f->thinker.function/*.acp1*/ = /*(actionf_p1) */T_Friction;
     f->friction = friction;
@@ -3391,7 +3392,7 @@ static void P_SpawnFriction(void)
 
 static void Add_Pusher(int type, int x_mag, int y_mag, mobj_t* source, int affectee)
 {
-    pusher_t *p = Z_Malloc(sizeof *p, PU_LEVEL, 0);
+    pusher_t *p = dsda_MallocThinker(sizeof *p);
 
     p->thinker.function = T_Pusher;
     p->source = source;

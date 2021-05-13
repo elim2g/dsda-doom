@@ -59,6 +59,8 @@
 #include "e6y.h"//e6y
 #include "dsda.h"
 
+#include "dsda/zone_x.h"
+
 #include "config.h"
 #ifdef HAVE_LIBZ
 #include <zlib.h>
@@ -2641,6 +2643,7 @@ void P_SetupLevel(int episode, int map, int playermask, skill_t skill)
   S_Start();
 
   Z_FreeTag(PU_LEVEL);
+  dsda_FreeThinkers();
   if (rejectlump != -1) { // cph - unlock the reject table
     W_UnlockLumpNum(rejectlump);
     rejectlump = -1;

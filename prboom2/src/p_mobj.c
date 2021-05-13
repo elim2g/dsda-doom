@@ -53,6 +53,8 @@
 #include "e6y.h"//e6y
 #include "dsda.h"
 
+#include "dsda/zone_x.h"
+
 #include "heretic/def.h"
 #include "p_enemy.h"
 #include "p_spec.h"
@@ -1148,7 +1150,7 @@ mobj_t* P_SpawnMobj(fixed_t x,fixed_t y,fixed_t z,mobjtype_t type)
   state_t*    st;
   mobjinfo_t* info;
 
-  mobj = Z_Malloc (sizeof(*mobj), PU_LEVEL, NULL);
+  mobj = dsda_MallocThinker(sizeof(*mobj));
   memset (mobj, 0, sizeof (*mobj));
   info = &mobjinfo[type];
   mobj->type = type;

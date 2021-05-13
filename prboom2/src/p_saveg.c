@@ -47,6 +47,7 @@
 #include "e6y.h"//e6y
 
 #include "dsda/msecnode.h"
+#include "dsda/zone_x.h"
 
 #define MARKED_FOR_DELETION -2
 
@@ -976,7 +977,7 @@ void P_TrueUnArchiveThinkers(void) {
         P_RemoveThinkerDelayed(th); // fix mobj leak
       }
       else
-        Z_Free (th);
+        dsda_FreeThinker(th);
       th = next;
     }
   P_InitThinkers ();
@@ -1023,7 +1024,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_ceiling:
         PADSAVEP();
         {
-          ceiling_t *ceiling = Z_Malloc (sizeof(*ceiling), PU_LEVEL, NULL);
+          ceiling_t *ceiling = dsda_MallocThinker(sizeof(*ceiling));
           memcpy (ceiling, save_p, sizeof(*ceiling));
           save_p += sizeof(*ceiling);
           ceiling->sector = &sectors[(size_t)ceiling->sector];
@@ -1040,7 +1041,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_door:
         PADSAVEP();
         {
-          vldoor_t *door = Z_Malloc (sizeof(*door), PU_LEVEL, NULL);
+          vldoor_t *door = dsda_MallocThinker(sizeof(*door));
           memcpy (door, save_p, sizeof(*door));
           save_p += sizeof(*door);
           door->sector = &sectors[(size_t)door->sector];
@@ -1057,7 +1058,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_floor:
         PADSAVEP();
         {
-          floormove_t *floor = Z_Malloc (sizeof(*floor), PU_LEVEL, NULL);
+          floormove_t *floor = dsda_MallocThinker(sizeof(*floor));
           memcpy (floor, save_p, sizeof(*floor));
           save_p += sizeof(*floor);
           floor->sector = &sectors[(size_t)floor->sector];
@@ -1070,7 +1071,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_plat:
         PADSAVEP();
         {
-          plat_t *plat = Z_Malloc (sizeof(*plat), PU_LEVEL, NULL);
+          plat_t *plat = dsda_MallocThinker(sizeof(*plat));
           memcpy (plat, save_p, sizeof(*plat));
           save_p += sizeof(*plat);
           plat->sector = &sectors[(size_t)plat->sector];
@@ -1087,7 +1088,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_flash:
         PADSAVEP();
         {
-          lightflash_t *flash = Z_Malloc (sizeof(*flash), PU_LEVEL, NULL);
+          lightflash_t *flash = dsda_MallocThinker(sizeof(*flash));
           memcpy (flash, save_p, sizeof(*flash));
           save_p += sizeof(*flash);
           flash->sector = &sectors[(size_t)flash->sector];
@@ -1099,7 +1100,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_strobe:
         PADSAVEP();
         {
-          strobe_t *strobe = Z_Malloc (sizeof(*strobe), PU_LEVEL, NULL);
+          strobe_t *strobe = dsda_MallocThinker(sizeof(*strobe));
           memcpy (strobe, save_p, sizeof(*strobe));
           save_p += sizeof(*strobe);
           strobe->sector = &sectors[(size_t)strobe->sector];
@@ -1111,7 +1112,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_glow:
         PADSAVEP();
         {
-          glow_t *glow = Z_Malloc (sizeof(*glow), PU_LEVEL, NULL);
+          glow_t *glow = dsda_MallocThinker(sizeof(*glow));
           memcpy (glow, save_p, sizeof(*glow));
           save_p += sizeof(*glow);
           glow->sector = &sectors[(size_t)glow->sector];
@@ -1123,7 +1124,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_flicker:           // killough 10/4/98
         PADSAVEP();
         {
-          fireflicker_t *flicker = Z_Malloc (sizeof(*flicker), PU_LEVEL, NULL);
+          fireflicker_t *flicker = dsda_MallocThinker(sizeof(*flicker));
           memcpy (flicker, save_p, sizeof(*flicker));
           save_p += sizeof(*flicker);
           flicker->sector = &sectors[(size_t)flicker->sector];
@@ -1136,7 +1137,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_elevator:
         PADSAVEP();
         {
-          elevator_t *elevator = Z_Malloc (sizeof(*elevator), PU_LEVEL, NULL);
+          elevator_t *elevator = dsda_MallocThinker(sizeof(*elevator));
           memcpy (elevator, save_p, sizeof(*elevator));
           save_p += sizeof(*elevator);
           elevator->sector = &sectors[(size_t)elevator->sector];
@@ -1150,7 +1151,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_scroll:       // killough 3/7/98: scroll effect thinkers
         PADSAVEP();
         {
-          scroll_t *scroll = Z_Malloc (sizeof(scroll_t), PU_LEVEL, NULL);
+          scroll_t *scroll = dsda_MallocThinker(sizeof(scroll_t));
           memcpy (scroll, save_p, sizeof(scroll_t));
           save_p += sizeof(scroll_t);
           scroll->thinker.function = T_Scroll;
@@ -1161,7 +1162,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_pusher:   // phares 3/22/98: new Push/Pull effect thinkers
         PADSAVEP();
         {
-          pusher_t *pusher = Z_Malloc (sizeof(pusher_t), PU_LEVEL, NULL);
+          pusher_t *pusher = dsda_MallocThinker(sizeof(pusher_t));
           memcpy (pusher, save_p, sizeof(pusher_t));
           save_p += sizeof(pusher_t);
           pusher->thinker.function = T_Pusher;
@@ -1173,7 +1174,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_friction:
         PADSAVEP();
         {
-          friction_t *friction = Z_Malloc (sizeof(friction_t), PU_LEVEL, NULL);
+          friction_t *friction = dsda_MallocThinker(sizeof(friction_t));
           memcpy (friction, save_p, sizeof(friction_t));
           save_p += sizeof(friction_t);
           friction->thinker.function = T_Friction;
@@ -1184,7 +1185,7 @@ void P_TrueUnArchiveThinkers(void) {
       case tc_true_mobj:
         PADSAVEP();
         {
-          mobj_t *mobj = Z_Malloc(sizeof(mobj_t), PU_LEVEL, NULL);
+          mobj_t *mobj = dsda_MallocThinker(sizeof(mobj_t));
 
           // killough 2/14/98 -- insert pointers to thinkers into table, in order:
           mobj_count++;

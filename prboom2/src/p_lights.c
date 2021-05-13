@@ -40,6 +40,8 @@
 #include "p_spec.h"
 #include "p_tick.h"
 
+#include "dsda/zone_x.h"
+
 //////////////////////////////////////////////////////////
 //
 // Lighting action routines, called once per tick
@@ -182,7 +184,7 @@ void P_SpawnFireFlicker (sector_t*  sector)
   // Nothing special about it during gameplay.
   sector->special &= ~31; //jff 3/14/98 clear non-generalized sector type
 
-  flick = Z_Malloc ( sizeof(*flick), PU_LEVEL, 0);
+  flick = dsda_MallocThinker(sizeof(*flick));
 
   memset(flick, 0, sizeof(*flick));
   P_AddThinker (&flick->thinker);
@@ -212,7 +214,7 @@ void P_SpawnLightFlash (sector_t* sector)
   else
     sector->special &= ~31; //jff 3/14/98 clear non-generalized sector type
 
-  flash = Z_Malloc ( sizeof(*flash), PU_LEVEL, 0);
+  flash = dsda_MallocThinker(sizeof(*flash));
 
   memset(flash, 0, sizeof(*flash));
   P_AddThinker (&flash->thinker);
@@ -244,7 +246,7 @@ void P_SpawnStrobeFlash
 {
   strobe_t* flash;
 
-  flash = Z_Malloc ( sizeof(*flash), PU_LEVEL, 0);
+  flash = dsda_MallocThinker(sizeof(*flash));
 
   memset(flash, 0, sizeof(*flash));
   P_AddThinker (&flash->thinker);
@@ -283,7 +285,7 @@ void P_SpawnGlowingLight(sector_t*  sector)
 {
   glow_t* g;
 
-  g = Z_Malloc( sizeof(*g), PU_LEVEL, 0);
+  g = dsda_MallocThinker(sizeof(*g));
 
   memset(g, 0, sizeof(*g));
   P_AddThinker(&g->thinker);
